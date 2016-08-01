@@ -26,7 +26,9 @@ public class ParallaxTransformer implements ViewPager.PageTransformer {
 
         ImageView imageView = (ImageView) root.getChildAt(0);
 
-        if (position <= 1) {
+        if (position < -1) {
+            imageView.setAlpha((float) 0);
+        } else if (position <= 1) {
             Matrix matrix = new Matrix();
             matrix.reset();
 
@@ -74,6 +76,8 @@ public class ParallaxTransformer implements ViewPager.PageTransformer {
             matrix.postTranslate(xPos, yPos);
             imageView.setScaleType(ImageView.ScaleType.MATRIX);
             imageView.setImageMatrix(matrix);
+        } else {
+            imageView.setAlpha((float) 0);
         }
     }
 }
